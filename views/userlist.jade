@@ -1,0 +1,29 @@
+extends cardlayout
+
+block content
+  #card
+    h1.header #{title}
+    table.topSpace(style="width:100%")
+      tr
+        th Name
+        th Username
+        th Email
+        th Edit
+        th Remove
+        th faves
+      each u, i in userlist
+        tr.user
+          td #{u.name}
+          td #{u.username}
+          td #{u.email}
+          td
+            a(href="/admin/edituser/#{u._id}") edit
+          td
+            a(href="/admin/removeuser/#{u._id}") delete
+          td
+            if u.faveteams
+              p teams
+            if u.favedashboards
+              p db
+            if u.faveevents
+              p events

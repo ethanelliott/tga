@@ -1,0 +1,136 @@
+extends cardlayout
+
+block content
+  #card.event
+    h1.header Select a Regional / District
+    select.eventSelect
+      option(value="") -
+      each event, i in events
+        option(value="#{event.key}") #{event.name}
+  #card.devent(style="display:none;")
+    h1.header Select an Event...
+    select.deventSelect
+      option(value="") -
+  #card.team(style="display:none;")
+    h1.header Select a team...
+    select.teamSelect
+      option(value="") -
+  #card.go(style="display:none;")
+    #gotopage.button
+      h1 Go!
+  script.
+    function sortTeams(arr)
+    {
+      var n = arr.length;
+      for (i = 1; i < n; i++)
+      {
+        for (j = 0; j < (n-i); j++)
+        {
+          if (arr[j].team_number > arr[j+1].team_number)
+          {
+            var tempArray = arr[j];
+            arr[j] = arr[j+1];
+            arr[j+1] = tempArray;
+          }
+        }
+      }
+    }
+    $(".eventSelect").change(function(){
+      $("#card.team").css({"display":"none"});
+      $("#card.devent").css({"display":"none"});
+      $("#card.go").css({"display":"none"});
+      if ($(".eventSelect").val() != "")
+      {
+        if ($(".eventSelect").val().length < 4)
+        {//District
+          var durl = "https://www.thebluealliance.com/api/v2/district/" + $(".eventSelect").val() + "/2017/events?X-TBA-App-Id=EthanE:datascraper:v01";
+          $.getJSON(durl, function(data){
+            $('.deventSelect').empty();
+            $('.deventSelect').append($('<option>', {
+                value: "",
+                text: "-"
+            }));
+            for(var i=0;i < data.length; i++)
+            {
+              $('.deventSelect').append($('<option>', {
+                  value: data[i].key,
+                  text: data[i].name
+              }));
+            }
+            $("#card.devent").css({"display":"block"});
+          });
+        }
+        else 
+        {//Regional
+          var url = "https://www.thebluealliance.com/api/v2/event/" + $(".eventSelect").val() + "/teams?X-TBA-App-Id=EthanE:datascraper:v01";
+          $.getJSON(url, function(data){
+            sortTeams(data);
+            $('.teamSelect').empty();
+            $('.teamSelect').append($('<option>', {
+                value: "",
+                text: "-"
+            }));
+            for(var i=0;i < data.length; i++)
+            {
+              $('.teamSelect').append($('<option>', {
+                  value: data[i].key,
+                  text: data[i].team_number + " - " + data[i].nickname
+              }));
+            }
+            $("#card.team").css({"display":"block"});
+          });
+        }
+      }
+      else 
+      {
+        $("#card.team").css({"display":"none"});
+        $("#card.devent").css({"display":"none"});
+      }
+    });
+    $(".deventSelect").change(function(){
+      $("#card.team").css({"display":"none"});
+      if ($(".deventSelect").val() != "")
+      {
+        var url = "https://www.thebluealliance.com/api/v2/event/" + $(".deventSelect").val() + "/teams?X-TBA-App-Id=EthanE:datascraper:v01";
+        $.getJSON(url, function(data){
+          sortTeams(data);
+          $('.teamSelect').empty();
+          $('.teamSelect').append($('<option>', {
+              value: "",
+              text: "-"
+          }));
+          for(var i=0;i < data.length; i++)
+          {
+            $('.teamSelect').append($('<option>', {
+                value: data[i].key,
+                text: data[i].team_number + " - " + data[i].nickname
+            }));
+          }
+          $("#card.team").css({"display":"block"});
+        });
+      }
+      else 
+      {
+        $("#card.team").css({"display":"none"});
+      }
+    });
+    $(".teamSelect").change(function(){
+      if ($(".teamSelect").val() != "")
+      {
+        $("#card.go").css({"display":"block"});
+      }
+      else 
+      {
+        $("#card.go").css({"display":"none"});
+      }
+    });
+    $("#gotopage").click(function(){
+      if ($(".eventSelect").val().length < 4) 
+      {
+        window.location.href = "/dashboard/" + $(".deventSelect").val() + "/" + $(".teamSelect").val();
+      }
+      else 
+      {
+        window.location.href = "/dashboard/" + $(".eventSelect").val() + "/" + $(".teamSelect").val();
+      }
+    });

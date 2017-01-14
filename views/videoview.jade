@@ -1,0 +1,22 @@
+extends cardlayout
+
+block content
+  #card
+    h1.header #{videoname}
+    if videotype == "iframe"
+      iframe(id="video", frameborder="0", height="500", scrolling="no", src="#{videosrc}", width="100%", allowfullscreen="true")
+      script.
+        $(document).ready(function() {
+          resizeVideo();
+        });
+        $(window).resize(function() {
+          resizeVideo();
+        });
+        function resizeVideo() {
+          var wp = $("#video").width() * (9/16.0);
+          $("#video").css({"height": wp});
+          $("#chat_embed").css({"height": $("#video").width()});
+        }
+
+    else
+      h1.header Video not found!

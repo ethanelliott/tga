@@ -1,0 +1,79 @@
+extends cardlayout
+
+block content
+  script.
+    $(document).ready(function(){
+      $(".notFave").click(function(){
+        var url = "/fave/add/event/#{eventd.key}";
+        $.getJSON(url,function(data){
+          if (data.status === "success")
+          {
+            quickSnack("Event added to faves successfully");
+            $("#fave-star.notFave").css({
+              "display":"none"
+            });
+            $("#fave-star.isFave").css({
+              "display":"inline"
+            });
+          }
+          else
+          {
+            $("#fave-star.notFave").css({
+              "display":"inline"
+            });
+            $("#fave-star.isFave").css({
+              "display":"none"
+            });
+          }
+        });
+      });
+      $(".isFave").click(function(){
+        var url = "/fave/remove/event/#{eventd.key}";
+        $.getJSON(url,function(data){
+          if (data.status === "success")
+          {
+            quickSnack("Event removed from faves successfully");
+            $("#fave-star.notFave").css({
+              "display":"inline"
+            });
+            $("#fave-star.isFave").css({
+              "display":"none"
+            });
+          }
+          else
+          {
+            $("#fave-star.notFave").css({
+              "display":"none"
+            });
+            $("#fave-star.isFave").css({
+              "display":"inline"
+            });
+          }
+        });
+      });
+    });
+  #card
+    if isstar == "yass"
+      #fave-star.isFave
+        svg(viewBox="0 0 24 24")
+          path(fill="#ffeb00" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z")
+      #fave-star.notFave(style="display:none")
+        svg(viewBox="0 0 24 24")
+          path(fill="#ffeb00", d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z")
+    else
+      #fave-star.isFave(style="display:none")
+        svg(viewBox="0 0 24 24")
+          path(fill="#ffeb00" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z")
+      #fave-star.notFave
+        svg(viewBox="0 0 24 24")
+          path(fill="#ffeb00", d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z")
+    if eventd.event_type == 1
+      h1.header #{title} #{eventd.event_type_string} Event
+      h1.subheader #{eventd.event_district_string} #{eventd.event_type_string} Event during week #{eventd.week}
+    else if eventd.event_type == 2
+      h1.header #{title} #{eventd.event_type_string}
+      h1.subheader #{eventd.event_district_string} #{eventd.event_type_string} during week #{eventd.week}
+    else
+      h1.header #{title} #{eventd.event_type_string}
+      h1.subheader #{eventd.event_type_string} during week #{eventd.week}
+    h1.subheader #{eventd.start_date} -> #{eventd.end_date}

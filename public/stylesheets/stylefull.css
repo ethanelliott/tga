@@ -1,0 +1,218 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,400italic,500,700,900,500italic,300italic,900italic,700italic,100italic);
+
+:root {
+  --main-colour:#6A1B9A;
+  --main-accent1:#7B1FA2;
+  --main-accent2:#8E24AA;
+  --text-colour:#FFFFFF;
+  --input-placeholder-colour:rgba(156,39,176,0.3);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-colour);
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+	margin:0;
+	padding:0;
+  font-size: 20px;
+  font-weight: 200;
+}
+body {
+  background-color: var(--main-colour);
+  color: var(--text-colour);
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+#content {
+  margin:auto auto;
+  width:100vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+#logo-container {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+#logo-container a {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 100;
+  font-size: 15vh;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  color: var(--text-colour);
+}
+svg {
+  height:15vh;
+  -webkit-filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.2));
+  filter:         drop-shadow(0px 0px 10px rgba(0,0,0,0.2));
+}
+
+#login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#login-container .login {
+  width:100%;
+  height:100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.flex50 {
+  flex:1;
+}
+.flex33 {
+  flex:1;
+}
+.flex66 {
+  flex:2;
+}
+.flexfill {
+  flex: 1 1 auto;
+}
+.flexauto {
+  flex: 0 1 auto;
+}
+
+
+input:focus {
+  box-shadow: 0px 0px 0px #000000;
+  border:none;
+  outline: none;
+}
+
+#login-container .login  input[type=text], .login  input[type=password]  {
+  display: block;
+  font-size: 6vh;
+  width:100%;
+  color: var(--main-colour);
+  padding: 4vh 1vw;
+  border: none;
+  flex: 0 1 auto;
+  text-align: center;
+  margin:auto;
+}
+
+#login-container .login  input[type=submit] {
+  display: block;
+  font-size: 6vh;
+  width:100%;
+  padding: 4vh 1vw;
+  width: 100%;
+  background-color: var(--main-colour);
+  color: white;
+  border: none;
+  cursor: pointer;
+  flex: 1 1 auto;
+  margin:auto;
+}
+::-webkit-input-placeholder {
+   color: var(--input-placeholder-colour);
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: var(--input-placeholder-colour);
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: var(--input-placeholder-colour);
+}
+
+:-ms-input-placeholder {
+   color: var(--input-placeholder-colour);
+}
+
+#login-container .login .username {
+  border-bottom: 1px solid #dddddd !important;
+}
+
+#start-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#start-container input[type=button] {
+  display: block;
+  font-size: 6vh;
+  width:100%;
+  padding: 4vh 1vw;
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  flex: 1 1 auto;
+}
+
+#start-container .register {
+  background-color: var(--main-accent1);
+}
+
+#start-container .login {
+  background-color: var(--main-accent2);
+}
+
+#register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#register-container .register {
+  width:100%;
+  height:100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.register span {
+  display: block;
+  margin:0 0;
+  width:100%;
+  color: #fff;
+  border: none;
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+#register-container .register  input[type=text], #register-container .register  input[type=password]  {
+  display: block;
+  margin:0 0;
+  font-size: 4vh;
+  width:100%;
+  color: var(--main-colour);
+  padding: 3vh 1vw;
+  border: none;
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+#register-container .register  input[type=submit] {
+  display: block;
+  font-size: 6vh;
+  width:100%;
+  padding: 4vh 1vw;
+  width: 100%;
+  background-color: var(--main-colour);
+  color: white;
+  border: none;
+  cursor: pointer;
+  flex: 1 1 auto;
+}

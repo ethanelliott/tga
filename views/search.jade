@@ -1,0 +1,13 @@
+extends cardlayout
+
+block content
+  #card
+    form.search(name="search",method="get",action="/search", autocomplete="off")
+      input.searchBar(type="text",name="q",placeholder="search for teams...")
+      input(type="submit", value="Search")
+  each result, i in results
+    a(href="/team/#{result.team_number}")
+      #card
+        h1.header #{result.team_number}
+        h1.content #{result.nickname}
+      

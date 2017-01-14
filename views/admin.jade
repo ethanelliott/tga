@@ -1,0 +1,11 @@
+extends cardlayout
+
+block content
+  #card
+    h1.header #{title}
+    h1.content What would you like to do today?
+  .admin-button-container
+    each bttn, i in af
+      a#button(href="#{bttn.url}")
+        img.icon(src="#{bttn.img}")
+        span.name #{bttn.name}

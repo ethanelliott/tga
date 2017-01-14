@@ -1,0 +1,12 @@
+extends cardlayout
+
+block content
+  #card
+    h1.header #{title}
+    form.addUser(name="adduser",method="post",action="/GAREGISTER", autocomplete="off")
+      input.name(type="text", placeholder="full name", name="uname",data-validation="required")
+      input.username(type="text", placeholder="username", name="uusername",data-validation="length alphanumeric server required",data-validation-length="3-20",data-validation-allowing="_",data-validation-error-msg="Between 3-20 chars, only alphanumeric characters and underscores",data-validation-url="/validateusername")
+      input.email(type="text", placeholder="email", name="uemail",data-validation="email required")
+      input.password(type="password", placeholder="password", name="upassword_confirmation",data-validation="strength length required",data-validation-strength="2",data-validation-length="min8")
+      input.password(type="password", placeholder="password confirm", name="upassword",data-validation="confirmation required")
+      input(type="submit", value="Add User")

@@ -1,0 +1,14 @@
+extends cardlayout
+
+block content
+  #card
+    h1.header #{title}
+    form.addUser(name="adduser",method="post",action="/admin/edituser/save/#{edituserdat._id}", autocomplete="off")
+      input.name(type="text", value ="#{edituserdat.name}", placeholder="full name", name="uname",data-validation="required")
+      input.username(type="text", value ="#{edituserdat.username}", placeholder="username", name="uusername",data-validation="length alphanumeric server required",data-validation-length="3-20",data-validation-allowing="_",data-validation-error-msg="Between 3-20 chars, only alphanumeric characters and underscores",data-validation-url="/validateusername")
+      input.email(type="text", value ="#{edituserdat.email}", placeholder="email", name="uemail",data-validation="email required")
+      input.email(type="hidden", value ="#{edituserdat.password}", placeholder="password", name="upassword",data-validation="required")
+      label
+        input.admin(type="checkbox" name="uadmin" value="true") 
+        span Admin
+      input(type="submit", value="Save Changes")

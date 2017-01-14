@@ -1,0 +1,55 @@
+extends cardlayout
+
+block content
+  #card
+    h1.header Bag-day!
+    #countdown(style="display:flex;margin:auto;margin-top:2vh;max-width:600px;")
+      style.
+        #countdown > div {
+          margin:auto;
+          text-align: center;
+        }
+        span {
+          font-size:2em;
+        }
+      #days
+        span.days
+        p.label Days
+      #hours
+        span.hours
+        p.label Hours
+      #minutes
+        span.minutes
+        p.label Minutes
+      #seconds
+        span.seconds
+        p.label Seconds
+    script.
+      $("#countdown").countdown("2017/02/21 23:59", function(event) {
+        $(".days").text(
+          event.strftime('%D')
+        );
+        $(".hours").text(
+          event.strftime('%H')
+        );
+        $(".minutes").text(
+          event.strftime('%M')
+        );
+        $(".seconds").text(
+          event.strftime('%S')
+        );
+      });
+  #card
+    iframe(id="video",width="100%", src="https://www.youtube.com/embed/EMiNmJW7enI", frameborder="0", allowfullscreen)
+    script.
+      $(document).ready(function() {
+        resizeVideo();
+      });
+      $(window).resize(function() {
+        resizeVideo();
+      });
+      function resizeVideo() {
+        var wp = $("#video").width() * (9/16.0);
+        $("#video").css({"height": wp});
+      }
+    a.button(href="https://firstfrc.blob.core.windows.net/frc2017/Manual/2017FRCGameSeasonManual.pdf",target="_blank") Download the manual!

@@ -1,0 +1,16 @@
+extends cardlayout
+
+block content
+  #card
+    h1.header #{title}
+    table.topSpace(style="width:100%")
+      tr
+        th #
+        th name
+        th RY
+      each team, i in teamlist
+        tr.user
+          td #{team.team_number}
+          td 
+            a(href="/team/#{team.team_number}") #{team.nickname}
+          td #{team.rookie_year}

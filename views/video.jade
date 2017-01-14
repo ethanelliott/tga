@@ -1,0 +1,21 @@
+extends cardlayout
+
+block content
+  #card
+    h1.header #{title} : #{videolist.length}
+    #videoList
+      for vid, i in videolist
+        script.
+          var url = "https://api.twitch.tv/kraken/streams/#{vid.id}?client_id=ujbba01698zw37mgqxfbla0kyoe4j2";
+          $.getJSON(url, function(data){
+            if (data.stream !== null)
+            {
+              $(".item.#{vid.id}").append('<div id="liveButton" class="live flexauto">Live!</div>');
+            }
+            else 
+            {
+              $(".item.#{vid.id}").append('<div id="liveButton" class="offline flexauto">Offline</div>');
+            }
+          });
+        a(class="item #{vid.id}", href="#{vid.url}") 
+          h1.flexfill #{vid.name}
